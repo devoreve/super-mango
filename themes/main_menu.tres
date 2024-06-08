@@ -1,0 +1,35 @@
+[gd_resource type="Theme" load_steps=6 format=3 uid="uid://blixntn0u0851"]
+
+[ext_resource type="FontFile" uid="uid://brbf05cetwe1" path="res://assets/fonts/PixelOperator8.ttf" id="1_ojymp"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wycnb"]
+bg_color = Color(0.788235, 0.196078, 0.235294, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wiyuc"]
+bg_color = Color(0.917647, 0.196078, 0.235294, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_h0xce"]
+bg_color = Color(0.788235, 0.196078, 0.235294, 1)
+expand_margin_left = 5.0
+expand_margin_top = 5.0
+expand_margin_right = 5.0
+expand_margin_bottom = 5.0
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_knwfp"]
+
+[resource]
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_ojymp")
+Button/styles/hover = SubResource("StyleBoxFlat_wycnb")
+Button/styles/normal = SubResource("StyleBoxFlat_wiyuc")
+Button/styles/pressed = SubResource("StyleBoxFlat_h0xce")
+CheckButton/styles/normal = SubResource("StyleBoxFlat_knwfp")
+Label/fonts/font = ExtResource("1_ojymp")

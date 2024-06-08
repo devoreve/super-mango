@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://cuos1vvoakedl"]
+
+[ext_resource type="Script" path="res://scripts/damageable.gd" id="1_sti40"]
+[ext_resource type="Texture2D" uid="uid://dihsswmflp44j" path="res://assets/sprites/Spider_1.png" id="2_x1ks5"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qw63b"]
+atlas = ExtResource("2_x1ks5")
+region = Rect2(0, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_stqtq"]
+atlas = ExtResource("2_x1ks5")
+region = Rect2(64, 0, 64, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1wnjk"]
+atlas = ExtResource("2_x1ks5")
+region = Rect2(128, 0, 64, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ngv5r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qw63b")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_stqtq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1wnjk")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_n2xmb"]
+size = Vector2(22, 9)
+
+[node name="Spider" type="Node2D"]
+
+[node name="Damageable" type="Node2D" parent="."]
+script = ExtResource("1_sti40")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Damageable"]
+z_index = 4
+sprite_frames = SubResource("SpriteFrames_ngv5r")
+autoplay = "default"
+frame_progress = 0.562711
+
+[node name="Area2D" type="Area2D" parent="Damageable"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damageable/Area2D"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_n2xmb")
+
+[connection signal="body_entered" from="Damageable/Area2D" to="Damageable" method="_on_area_2d_body_entered"]

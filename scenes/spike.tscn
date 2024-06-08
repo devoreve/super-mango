@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddbdjdjesd1lo"]
+
+[ext_resource type="PackedScene" uid="uid://3n5sqrc5srgk" path="res://scenes/damageable.tscn" id="1_bo1qj"]
+[ext_resource type="Texture2D" uid="uid://gtutgy4bkcva" path="res://assets/sprites/Spike.png" id="2_7apa4"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uqmat"]
+atlas = ExtResource("2_7apa4")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_thy5q"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uqmat")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s6p00"]
+size = Vector2(11, 16)
+
+[node name="Spike" instance=ExtResource("1_bo1qj")]
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = SubResource("SpriteFrames_thy5q")
+autoplay = ""
+frame_progress = 0.0
+
+[node name="CollisionShape2D" parent="Area2D" index="0"]
+position = Vector2(-0.5, 0)
+shape = SubResource("RectangleShape2D_s6p00")

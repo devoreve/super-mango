@@ -1,0 +1,179 @@
+[gd_scene load_steps=11 format=3 uid="uid://bdetattvgxxma"]
+
+[ext_resource type="FontFile" uid="uid://brbf05cetwe1" path="res://assets/fonts/PixelOperator8.ttf" id="1_3u0np"]
+[ext_resource type="Theme" uid="uid://blixntn0u0851" path="res://themes/main_menu.tres" id="1_dsfai"]
+[ext_resource type="Script" path="res://scripts/main_menu.gd" id="1_q6vi1"]
+[ext_resource type="FontFile" uid="uid://cunpqy4p4g0vy" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="2_knjnd"]
+[ext_resource type="Texture2D" uid="uid://ybtipwdp6g2v" path="res://assets/sprites/Forest_Background_0.png" id="2_vw1hq"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_1wytw"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gfep3"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3fqun"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m0qa1"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_d3mr1"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_dsfai")
+script = ExtResource("1_q6vi1")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 649.0
+texture = ExtResource("2_vw1hq")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 227.0
+offset_top = 50.0
+offset_right = 1024.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(0.917647, 0.196078, 0.235294, 1)
+theme_override_fonts/font = ExtResource("2_knjnd")
+theme_override_font_sizes/font_size = 75
+text = "Super mango"
+
+[node name="MainMenuContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 423.0
+offset_top = 260.0
+offset_right = 815.0
+offset_bottom = 390.0
+theme_override_constants/separation = 40
+
+[node name="PlayButton" type="Button" parent="MainMenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3u0np")
+theme_override_font_sizes/font_size = 40
+text = "Play"
+expand_icon = true
+
+[node name="SettingsButton" type="Button" parent="MainMenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3u0np")
+theme_override_font_sizes/font_size = 40
+text = "Settings"
+expand_icon = true
+
+[node name="CreditsButton" type="Button" parent="MainMenuContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Credits"
+
+[node name="ExitButton" type="Button" parent="MainMenuContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_3u0np")
+theme_override_font_sizes/font_size = 40
+text = "Exit"
+expand_icon = true
+
+[node name="SubTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 170.0
+offset_right = 873.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 24
+text = "A (very) short adventure"
+
+[node name="SettingsContainer" type="VBoxContainer" parent="."]
+visible = false
+layout_mode = 0
+offset_left = 265.0
+offset_top = 270.0
+offset_right = 1078.0
+offset_bottom = 516.0
+theme_override_constants/separation = 50
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SettingsContainer"]
+layout_mode = 2
+theme_override_constants/separation = 40
+
+[node name="LabelContainer" type="VBoxContainer" parent="SettingsContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="FullscreenLabel" type="Label" parent="SettingsContainer/HBoxContainer/LabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Fullscreen"
+
+[node name="GlobalVolumeLabel" type="Label" parent="SettingsContainer/HBoxContainer/LabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Volume global"
+
+[node name="MusicVolumeLabel" type="Label" parent="SettingsContainer/HBoxContainer/LabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Musique"
+
+[node name="SFXVolumeLabel" type="Label" parent="SettingsContainer/HBoxContainer/LabelContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 40
+text = "Effets sonores"
+
+[node name="InputContainer" type="VBoxContainer" parent="SettingsContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/separation = 30
+
+[node name="FullscreenButton" type="CheckButton" parent="SettingsContainer/HBoxContainer/InputContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 6
+theme_override_styles/pressed = SubResource("StyleBoxFlat_1wytw")
+theme_override_styles/disabled = SubResource("StyleBoxFlat_gfep3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_3fqun")
+theme_override_styles/hover_pressed = SubResource("StyleBoxFlat_m0qa1")
+theme_override_styles/focus = SubResource("StyleBoxFlat_d3mr1")
+
+[node name="VolumeSlider" type="HSlider" parent="SettingsContainer/HBoxContainer/InputContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="MusicSlider" type="HSlider" parent="SettingsContainer/HBoxContainer/InputContainer"]
+layout_mode = 2
+size_flags_vertical = 10
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="SFXSlider" type="HSlider" parent="SettingsContainer/HBoxContainer/InputContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+max_value = 1.0
+step = 0.01
+value = 1.0
+
+[node name="BackToMainMenuButton" type="Button" parent="SettingsContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 6
+theme_override_font_sizes/font_size = 40
+text = "Main menu"
+
+[connection signal="button_up" from="MainMenuContainer/PlayButton" to="." method="_on_play_button_button_up"]
+[connection signal="pressed" from="MainMenuContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="button_up" from="MainMenuContainer/SettingsButton" to="." method="_on_play_button_button_up"]
+[connection signal="pressed" from="MainMenuContainer/SettingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="button_up" from="MainMenuContainer/ExitButton" to="." method="_on_play_button_button_up"]
+[connection signal="pressed" from="MainMenuContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="toggled" from="SettingsContainer/HBoxContainer/InputContainer/FullscreenButton" to="." method="_on_check_button_toggled"]
+[connection signal="value_changed" from="SettingsContainer/HBoxContainer/InputContainer/VolumeSlider" to="." method="_on_volume_slider_value_changed"]
+[connection signal="value_changed" from="SettingsContainer/HBoxContainer/InputContainer/MusicSlider" to="." method="_on_music_slider_value_changed"]
+[connection signal="value_changed" from="SettingsContainer/HBoxContainer/InputContainer/SFXSlider" to="." method="_on_sfx_slider_value_changed"]
+[connection signal="pressed" from="SettingsContainer/BackToMainMenuButton" to="." method="_on_back_to_main_menu_button_pressed"]

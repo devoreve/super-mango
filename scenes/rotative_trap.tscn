@@ -1,0 +1,81 @@
+[gd_scene load_steps=9 format=3 uid="uid://dap50eyug220n"]
+
+[ext_resource type="PackedScene" uid="uid://3n5sqrc5srgk" path="res://scenes/damageable.tscn" id="1_gly66"]
+[ext_resource type="Texture2D" uid="uid://dfruqf1tru4b7" path="res://assets/sprites/Axe_Trap.png" id="2_k17lq"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_eoeaq"]
+atlas = ExtResource("2_k17lq")
+region = Rect2(0, 0, 48, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_rvwr6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_eoeaq")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_7a6o5"]
+radius = 6.0
+height = 28.0
+
+[sub_resource type="Animation" id="Animation_wyu13"]
+length = 0.001
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Damageable:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0),
+"points": PackedFloat32Array(0, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0)
+}
+
+[sub_resource type="Animation" id="Animation_3y6p5"]
+resource_name = "rotate"
+length = 2.0
+loop_mode = 2
+tracks/0/type = "bezier"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Damageable:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"handle_modes": PackedInt32Array(0, 0, 0),
+"points": PackedFloat32Array(1.5708, -0.25, 0, 0.25, 0, -1.5708, -0.4, 0.0148532, 0.4, -0.0125852, 1.571, -0.25, 0, 0.25, 0),
+"times": PackedFloat32Array(0, 1, 2)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_lxm4j"]
+_data = {
+"RESET": SubResource("Animation_wyu13"),
+"rotate": SubResource("Animation_3y6p5")
+}
+
+[node name="RotativeTrap" type="Node2D"]
+
+[node name="Damageable" parent="." instance=ExtResource("1_gly66")]
+
+[node name="AnimatedSprite2D" parent="Damageable" index="0"]
+sprite_frames = SubResource("SpriteFrames_rvwr6")
+autoplay = ""
+frame_progress = 0.0
+
+[node name="CollisionShape2D" parent="Damageable/Area2D" index="0"]
+position = Vector2(8.74228e-07, 20)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_7a6o5")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_lxm4j")
+}
+autoplay = "rotate"
+
+[editable path="Damageable"]

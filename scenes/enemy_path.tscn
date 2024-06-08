@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://bdghvmvnhe6qi"]
+
+[ext_resource type="Script" path="res://scripts/bird_path.gd" id="1_lwl24"]
+
+[sub_resource type="Curve2D" id="Curve2D_jv6re"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 404, 208, 0, 0, 0, 0, 539, 208, 0, 0, 0, 0, 404, 208)
+}
+point_count = 3
+
+[node name="EnemyPath" type="Path2D"]
+curve = SubResource("Curve2D_jv6re")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="."]
+position = Vector2(404, 208)
+rotation = 0.519146
+progress = 602.121
+rotates = false
+script = ExtResource("1_lwl24")
+
+[node name="_Timer_21527" type="Timer" parent="PathFollow2D"]
+wait_time = 0.2
+one_shot = true

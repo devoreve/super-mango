@@ -1,0 +1,56 @@
+[gd_scene load_steps=8 format=3 uid="uid://hi3gkpsbgw7e"]
+
+[ext_resource type="Script" path="res://scripts/damageable.gd" id="1_481qs"]
+[ext_resource type="Texture2D" uid="uid://c124n2oqwodn2" path="res://assets/sprites/Bird_1.png" id="2_ovpkw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_hhsmj"]
+atlas = ExtResource("2_ovpkw")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ammw7"]
+atlas = ExtResource("2_ovpkw")
+region = Rect2(48, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_olwro"]
+atlas = ExtResource("2_ovpkw")
+region = Rect2(96, 0, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmtdb"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_hhsmj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ammw7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_olwro")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cdbfg"]
+size = Vector2(13, 11)
+
+[node name="Bird" type="Node2D"]
+
+[node name="Damageable" type="Node2D" parent="."]
+script = ExtResource("1_481qs")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Damageable"]
+sprite_frames = SubResource("SpriteFrames_cmtdb")
+autoplay = "default"
+frame_progress = 0.482538
+flip_h = true
+
+[node name="Area2D" type="Area2D" parent="Damageable"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Damageable/Area2D"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_cdbfg")
+
+[connection signal="body_entered" from="Damageable/Area2D" to="Damageable" method="_on_area_2d_body_entered"]

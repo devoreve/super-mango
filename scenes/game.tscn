@@ -6,7 +6,6 @@
 [ext_resource type="Script" path="res://scripts/GameManager.gd" id="2_77xpp"]
 [ext_resource type="Texture2D" uid="uid://d170f4ivib45j" path="res://assets/sprites/tileset.png" id="2_550jq"]
 [ext_resource type="Texture2D" uid="uid://448ge58un5w0" path="res://assets/sprites/props.png" id="3_4kmhs"]
-[ext_resource type="AudioStream" uid="uid://dv2880ayqfmse" path="res://assets/sounds/hero_death.mp3" id="3_kyr0j"]
 [ext_resource type="Texture2D" uid="uid://b0uifu1edcjw1" path="res://assets/sprites/world_tileset.png" id="4_1emuf"]
 [ext_resource type="PackedScene" uid="uid://daatdppprs081" path="res://scenes/platform.tscn" id="4_ccc1g"]
 [ext_resource type="PackedScene" uid="uid://bxokmw8ut7urm" path="res://scenes/coin.tscn" id="5_8qv0t"]
@@ -14,6 +13,7 @@
 [ext_resource type="FontFile" uid="uid://brbf05cetwe1" path="res://assets/fonts/PixelOperator8.ttf" id="9_6e4aq"]
 [ext_resource type="Texture2D" uid="uid://ybtipwdp6g2v" path="res://assets/sprites/Forest_Background_0.png" id="12_2gy3t"]
 [ext_resource type="PackedScene" uid="uid://de2ptghkwoy6r" path="res://scenes/health.tscn" id="13_7o8ji"]
+[ext_resource type="PackedScene" uid="uid://cdnu213h3gv2b" path="res://scenes/game_over_menu.tscn" id="16_84ijh"]
 [ext_resource type="PackedScene" uid="uid://io02c3i8uvmd" path="res://scenes/pause_menu.tscn" id="16_emxo3"]
 [ext_resource type="Script" path="res://scripts/bird_path.gd" id="17_686tl"]
 [ext_resource type="PackedScene" uid="uid://ddbdjdjesd1lo" path="res://scenes/spike.tscn" id="17_d3h7l"]
@@ -1636,11 +1636,6 @@ script = ExtResource("1_jyywt")
 unique_name_in_owner = true
 script = ExtResource("2_77xpp")
 
-[node name="GameOverSound" type="AudioStreamPlayer2D" parent="GameManager"]
-stream = ExtResource("3_kyr0j")
-pitch_scale = 0.8
-bus = &"SFX"
-
 [node name="TileMap" type="TileMap" parent="."]
 position = Vector2(2, 2)
 tile_set = SubResource("TileSet_dy5bu")
@@ -1658,7 +1653,7 @@ layer_3/z_index = -1
 layer_3/tile_data = PackedInt32Array(1376297, 196611, 8, 1310761, 196611, 7, 1245225, 131075, 8, 1179689, 131075, 8, 1114153, 131075, 8, 1048617, 131075, 8, 983081, 131075, 8, 786472, 131075, 4, 852008, 131075, 5, 917544, 131075, 6, 786473, 196611, 4, 852009, 196611, 5, 917545, 196611, 6, 786474, 262147, 4, 852010, 262147, 5, 917546, 262147, 6, 1376308, 196611, 8, 1310772, 196611, 7, 1114163, 131075, 4, 1179699, 131075, 5, 1245235, 131075, 6, 1114164, 196611, 4, 1179700, 196611, 5, 1245236, 196611, 6, 1114165, 262147, 4, 1179701, 262147, 5, 1245237, 262147, 6, 1376303, 131075, 8, 1179694, 131075, 4, 1245230, 131075, 5, 1310766, 131075, 6, 1179695, 196611, 4, 1245231, 196611, 5, 1310767, 196611, 6, 1179696, 262147, 4, 1245232, 262147, 5, 1310768, 262147, 6, 1376286, 131075, 8, 1310750, 131075, 8, 1245214, 131075, 8, 1179678, 131075, 8, 983069, 131075, 4, 1048605, 131075, 5, 1114141, 131075, 6, 983070, 196611, 4, 1048606, 196611, 5, 1114142, 196611, 6, 983071, 262147, 4, 1048607, 262147, 5, 1114143, 262147, 6, 655396, 196611, 8, 589860, 196611, 7, 524324, 131075, 8, 458788, 196611, 6, 393251, 131075, 5, 393252, 196611, 5, 393253, 262147, 5, 327716, 196611, 4)
 
 [node name="Player" parent="." instance=ExtResource("1_qa6nj")]
-position = Vector2(1607, 212)
+position = Vector2(604, 354)
 collision_mask = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
@@ -1670,6 +1665,7 @@ position_smoothing_enabled = true
 
 [node name="Killzone" parent="." instance=ExtResource("6_cer87")]
 position = Vector2(561, 314)
+collision_layer = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
 shape = SubResource("WorldBoundaryShape2D_ubl7e")
@@ -1733,6 +1729,22 @@ shape = SubResource("RectangleShape2D_k351h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder/CollisionShape2D/StaticBody2D"]
 position = Vector2(0, -49)
+shape = SubResource("RectangleShape2D_w1vw1")
+one_way_collision = true
+
+[node name="rope" type="Area2D" parent="."]
+position = Vector2(1689, 340)
+collision_mask = 2
+script = ExtResource("22_s35vo")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rope"]
+position = Vector2(1, -22.5)
+shape = SubResource("RectangleShape2D_k351h")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="rope/CollisionShape2D" groups=["top_ladder"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="rope/CollisionShape2D/StaticBody2D"]
+position = Vector2(0, -44)
 shape = SubResource("RectangleShape2D_w1vw1")
 one_way_collision = true
 
@@ -1911,6 +1923,9 @@ scale = Vector2(3, 3)
 
 [node name="PauseMenu" parent="UI" instance=ExtResource("16_emxo3")]
 
+[node name="GameOverMenu" parent="UI" instance=ExtResource("16_84ijh")]
+visible = false
+
 [node name="Enemies" type="Node" parent="."]
 
 [node name="BirdPath" type="Path2D" parent="Enemies"]
@@ -2022,25 +2037,9 @@ rotation = -1.5708
 position = Vector2(714, 166)
 rotation = 1.5708
 
-[node name="Ladder2" type="Area2D" parent="."]
-position = Vector2(1689, 340)
-collision_mask = 2
-script = ExtResource("22_s35vo")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder2"]
-position = Vector2(1, -22.5)
-shape = SubResource("RectangleShape2D_k351h")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Ladder2/CollisionShape2D" groups=["top_ladder"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ladder2/CollisionShape2D/StaticBody2D"]
-position = Vector2(0, -44)
-shape = SubResource("RectangleShape2D_w1vw1")
-one_way_collision = true
-
 [connection signal="body_entered" from="Ladder" to="Ladder" method="_on_body_entered"]
 [connection signal="body_exited" from="Ladder" to="Ladder" method="_on_body_exited"]
+[connection signal="body_entered" from="rope" to="rope" method="_on_body_entered"]
+[connection signal="body_exited" from="rope" to="rope" method="_on_body_exited"]
 [connection signal="body_entered" from="Enemies/BirdPath/PathFollow2D/Bird/Damageable/Area2D" to="Enemies/BirdPath/PathFollow2D/Bird/Damageable" method="_on_area_2d_body_entered"]
 [connection signal="body_entered" from="Enemies/SpiderPath/PathFollow2D/Spider/Damageable/Area2D" to="Enemies/SpiderPath/PathFollow2D/Spider/Damageable" method="_on_area_2d_body_entered"]
-[connection signal="body_entered" from="Ladder2" to="Ladder2" method="_on_body_entered"]
-[connection signal="body_exited" from="Ladder2" to="Ladder2" method="_on_body_exited"]

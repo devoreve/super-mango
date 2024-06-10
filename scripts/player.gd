@@ -39,6 +39,7 @@ signal coins_received(total_coins)
 @onready var hit_sound = $Sounds/HitSound
 @onready var invincible_component = $InvincibleComponent
 @onready var game_manager = %GameManager
+@onready var camera = $Camera2D
 
 func _process(_delta):
 	can_climb_mountain = ray_cast_right.is_colliding() or ray_cast_left.is_colliding()

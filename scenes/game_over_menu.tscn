@@ -1,27 +1,23 @@
-[gd_scene load_steps=9 format=3 uid="uid://io02c3i8uvmd"]
+[gd_scene load_steps=8 format=3 uid="uid://cdnu213h3gv2b"]
 
-[ext_resource type="Theme" uid="uid://blixntn0u0851" path="res://themes/main_menu.tres" id="1_pkc4p"]
-[ext_resource type="Shader" path="res://shaders/pause_menu.gdshader" id="2_hxwc3"]
-[ext_resource type="Script" path="res://scripts/pause_menu.gd" id="2_i5ln4"]
-[ext_resource type="FontFile" uid="uid://cunpqy4p4g0vy" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_5viev"]
+[ext_resource type="Theme" uid="uid://blixntn0u0851" path="res://themes/main_menu.tres" id="1_vtmgh"]
+[ext_resource type="Script" path="res://scripts/game_over_menu.gd" id="2_g24kd"]
+[ext_resource type="AudioStream" uid="uid://bx1sulqq8dj3r" path="res://assets/sounds/game_over.mp3" id="2_p8d5o"]
+[ext_resource type="FontFile" uid="uid://cunpqy4p4g0vy" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="3_m5bgp"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_qll4y"]
-shader = ExtResource("2_hxwc3")
-shader_parameter/lod = 0.0
-
-[sub_resource type="Animation" id="Animation_4yp5n"]
+[sub_resource type="Animation" id="Animation_rtmon"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/path = NodePath("GameOverSound:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.0]
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -35,21 +31,32 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
 
-[sub_resource type="Animation" id="Animation_dxwku"]
-resource_name = "blur"
-length = 0.3
+[sub_resource type="Animation" id="Animation_d0ip7"]
+resource_name = "game_over"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("ColorRect:material:shader_parameter/lod")
+tracks/0/path = NodePath("GameOverSound:playing")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.3),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [0.0, 0.875]
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -63,14 +70,26 @@ tracks/1/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_w4xil"]
-_data = {
-"RESET": SubResource("Animation_4yp5n"),
-"blur": SubResource("Animation_dxwku")
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ColorRect:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
 }
 
-[node name="PauseMenu" type="Control"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ook74"]
+_data = {
+"RESET": SubResource("Animation_rtmon"),
+"game_over": SubResource("Animation_d0ip7")
+}
+
+[node name="GameOverMenu" type="Control"]
 process_mode = 3
 layout_mode = 3
 anchors_preset = 15
@@ -78,14 +97,15 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-theme = ExtResource("1_pkc4p")
-script = ExtResource("2_i5ln4")
+theme = ExtResource("1_vtmgh")
+script = ExtResource("2_g24kd")
 
 [node name="ColorRect" type="ColorRect" parent="."]
-material = SubResource("ShaderMaterial_qll4y")
+modulate = Color(1, 1, 1, 0)
 layout_mode = 0
-offset_right = 1276.0
-offset_bottom = 646.0
+offset_right = 1280.0
+offset_bottom = 648.0
+color = Color(0, 0, 0, 1)
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
 modulate = Color(1, 1, 1, 0)
@@ -104,21 +124,15 @@ grow_vertical = 2
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
-theme_override_fonts/font = ExtResource("4_5viev")
+theme_override_fonts/font = ExtResource("3_m5bgp")
 theme_override_font_sizes/font_size = 64
-text = "Pause"
+text = "Game Over"
 
 [node name="VBoxContainer" type="VBoxContainer" parent="PanelContainer"]
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
 theme_override_constants/separation = 30
-
-[node name="ResumeButton" type="Button" parent="PanelContainer/VBoxContainer"]
-layout_mode = 2
-size_flags_vertical = 3
-theme_override_font_sizes/font_size = 40
-text = "Resume"
 
 [node name="RestartButton" type="Button" parent="PanelContainer/VBoxContainer"]
 layout_mode = 2
@@ -132,11 +146,13 @@ size_flags_vertical = 3
 theme_override_font_sizes/font_size = 40
 text = "Exit"
 
+[node name="GameOverSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_p8d5o")
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_w4xil")
+"": SubResource("AnimationLibrary_ook74")
 }
 
-[connection signal="pressed" from="PanelContainer/VBoxContainer/ResumeButton" to="." method="_on_resume_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/RestartButton" to="." method="_on_restart_button_pressed"]
 [connection signal="pressed" from="PanelContainer/VBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -31,9 +31,11 @@ func update_state(game_state: int):
 	game_state_changed.emit(current_state)
 
 func handle_started() -> void:
+	Music.play()
 	Engine.time_scale = 1
 
 func handle_game_over() -> void:
+	Music.stop()
 	Engine.time_scale = 0.5
 	await get_tree().create_timer(1).timeout
 	Engine.time_scale = 0

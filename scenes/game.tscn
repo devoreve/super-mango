@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cn30bbhfuwp1w"]
+[gd_scene load_steps=53 format=3 uid="uid://cn30bbhfuwp1w"]
 
 [ext_resource type="Texture2D" uid="uid://6pa1wtcuayas" path="res://assets/sprites/background.png" id="1_8rvnk"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_jyywt"]
@@ -17,6 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://io02c3i8uvmd" path="res://scenes/pause_menu.tscn" id="16_emxo3"]
 [ext_resource type="Script" path="res://scripts/bird_path.gd" id="17_686tl"]
 [ext_resource type="PackedScene" uid="uid://ddbdjdjesd1lo" path="res://scenes/spike.tscn" id="17_d3h7l"]
+[ext_resource type="PackedScene" uid="uid://b1kcwwipypkq5" path="res://scenes/coin_counter.tscn" id="17_pndpv"]
 [ext_resource type="Script" path="res://scripts/damageable.gd" id="18_tpmdt"]
 [ext_resource type="Texture2D" uid="uid://c124n2oqwodn2" path="res://assets/sprites/Bird_1.png" id="19_65udd"]
 [ext_resource type="PackedScene" uid="uid://cipluycwijcu" path="res://scenes/fish.tscn" id="20_8kcl2"]
@@ -1655,7 +1656,7 @@ layer_3/tile_data = PackedInt32Array(1376297, 196611, 8, 1310761, 196611, 7, 124
 [node name="Player" parent="." instance=ExtResource("1_qa6nj")]
 position = Vector2(604, 354)
 collision_mask = 1
-health = 1
+health = 6
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(18, -7)
@@ -1926,6 +1927,12 @@ scale = Vector2(3, 3)
 
 [node name="GameOverMenu" parent="UI" instance=ExtResource("16_84ijh")]
 visible = false
+
+[node name="CoinCounter" parent="UI" instance=ExtResource("17_pndpv")]
+offset_left = 1117.0
+offset_top = 5.0
+offset_right = 1117.0
+offset_bottom = 5.0
 
 [node name="Enemies" type="Node" parent="."]
 

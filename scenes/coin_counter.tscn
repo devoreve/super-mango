@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1kcwwipypkq5"]
+
+[ext_resource type="Script" path="res://scripts/coin_counter.gd" id="1_s8sir"]
+[ext_resource type="FontFile" uid="uid://brbf05cetwe1" path="res://assets/fonts/PixelOperator8.ttf" id="2_4b7nr"]
+[ext_resource type="Texture2D" uid="uid://b7augomv2il6g" path="res://assets/sprites/Coins_Ui.png" id="2_5fgay"]
+
+[node name="CoinCounter" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_s8sir")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 99.0
+offset_bottom = 48.0
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("2_4b7nr")
+theme_override_font_sizes/font_size = 32
+text = "1234"
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+texture = ExtResource("2_5fgay")
+expand_mode = 2

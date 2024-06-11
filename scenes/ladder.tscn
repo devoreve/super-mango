@@ -2,10 +2,10 @@
 
 [ext_resource type="Script" path="res://scripts/ladder.gd" id="1_586ho"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_k351h"]
-size = Vector2(12, 102)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r065r"]
+size = Vector2(12, 116)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_w1vw1"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_67y3c"]
 size = Vector2(12, 2)
 
 [node name="Ladder" type="Area2D"]
@@ -14,14 +14,13 @@ script = ExtResource("1_586ho")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -23)
-shape = SubResource("RectangleShape2D_k351h")
+shape = SubResource("RectangleShape2D_r065r")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="CollisionShape2D" groups=["top_ladder"]]
-collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionShape2D/StaticBody2D"]
 position = Vector2(0, -52.5)
-shape = SubResource("RectangleShape2D_w1vw1")
+shape = SubResource("RectangleShape2D_67y3c")
 one_way_collision = true
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

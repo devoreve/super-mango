@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=3 uid="uid://cn30bbhfuwp1w"]
+[gd_scene load_steps=56 format=3 uid="uid://cn30bbhfuwp1w"]
 
 [ext_resource type="Texture2D" uid="uid://6pa1wtcuayas" path="res://assets/sprites/background.png" id="1_8rvnk"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_jyywt"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://daatdppprs081" path="res://scenes/platform.tscn" id="4_ccc1g"]
 [ext_resource type="PackedScene" uid="uid://bxokmw8ut7urm" path="res://scenes/coin.tscn" id="5_8qv0t"]
 [ext_resource type="PackedScene" uid="uid://ubp2gv7t04le" path="res://scenes/killzone.tscn" id="6_cer87"]
+[ext_resource type="Script" path="res://scripts/player_camera.gd" id="8_fpp58"]
 [ext_resource type="FontFile" uid="uid://brbf05cetwe1" path="res://assets/fonts/PixelOperator8.ttf" id="9_6e4aq"]
 [ext_resource type="Texture2D" uid="uid://ybtipwdp6g2v" path="res://assets/sprites/Forest_Background_0.png" id="12_2gy3t"]
 [ext_resource type="PackedScene" uid="uid://de2ptghkwoy6r" path="res://scenes/health.tscn" id="13_7o8ji"]
@@ -1664,12 +1665,16 @@ position = Vector2(604, 354)
 collision_mask = 1
 health = 6
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(18, -7)
+[node name="PlayerCamera" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
+position = Vector2(622, 347)
 zoom = Vector2(4, 4)
 limit_bottom = 400
 limit_smoothed = true
-position_smoothing_enabled = true
+position_smoothing_speed = 8.0
+script = ExtResource("8_fpp58")
+player = NodePath("../Player")
+smoothing_enabled = true
+smoothing_distance = 4
 
 [node name="Killzone" parent="." instance=ExtResource("6_cer87")]
 position = Vector2(561, 314)

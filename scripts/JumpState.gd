@@ -2,7 +2,7 @@ class_name JumpState
 extends State
 
 func enter() -> void:
-	if character.is_on_floor():
+	if character.is_on_floor() or character.is_on_wall():
 		character.velocity.y = character.jump_velocity
 		animated_sprite.play("jump")
 		character.jump_sound.play()

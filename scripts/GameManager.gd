@@ -7,10 +7,9 @@ enum State {
 	LEVEL_COMPLETED
 }
 
-@export var default_state: GameManager.State = 0
+@export var default_state: GameManager.State = GameManager.State.STARTED
 
 var current_state: int
-@onready var game_over_sound = $GameOverSound
 
 signal game_state_changed(game_state)
 

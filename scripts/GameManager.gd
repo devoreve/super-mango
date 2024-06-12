@@ -3,7 +3,8 @@ extends Node
 
 enum State {
 	STARTED,
-	GAME_OVER
+	GAME_OVER,
+	LEVEL_COMPLETED
 }
 
 @export var default_state: GameManager.State = 0

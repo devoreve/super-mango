@@ -11,7 +11,8 @@ enum State {
 	JUMP,
 	DOUBLE_JUMP,
 	CLIMB,
-	KNOCKEDBACK
+	KNOCKEDBACK,
+	COMPLETE_LEVEL
 }
 
 func _ready():

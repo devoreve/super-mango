@@ -5,6 +5,10 @@ func enter() -> void:
 	animated_sprite.play("idle")
 	
 func physics_update(delta: float) -> void:
+	if move_component.interact() and character.can_open_door:
+		state_changed.emit(StateMachine.State.COMPLETE_LEVEL)
+		return
+		
 	if character.is_knocked_back:
 		state_changed.emit(StateMachine.State.KNOCKEDBACK)
 		return

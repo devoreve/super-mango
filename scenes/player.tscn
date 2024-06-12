@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://choqfg4hnhefo"]
+[gd_scene load_steps=40 format=3 uid="uid://choqfg4hnhefo"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_15wyd"]
 [ext_resource type="Texture2D" uid="uid://u24fm31a02nc" path="res://assets/sprites/Player.png" id="1_x57nc"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://scripts/DoubleJumpState.gd" id="7_3ls3y"]
 [ext_resource type="Script" path="res://scripts/ClimbState.gd" id="8_alwmd"]
 [ext_resource type="Script" path="res://scripts/KnockedBackState.gd" id="9_hus0r"]
+[ext_resource type="Script" path="res://scripts/CompleteLevelState.gd" id="10_4ysma"]
 [ext_resource type="Script" path="res://scripts/ClimbComponent.gd" id="10_58m00"]
 [ext_resource type="AudioStream" uid="uid://bos7si0c3ftt8" path="res://assets/sounds/Jump.mp3" id="12_yp3ry"]
 [ext_resource type="AudioStream" uid="uid://cc8256qtqm6jr" path="res://assets/sounds/hit.mp3" id="13_7pph5"]
@@ -66,6 +67,14 @@ region = Rect2(0, 144, 48, 48)
 [sub_resource type="AtlasTexture" id="AtlasTexture_kj77e"]
 atlas = ExtResource("1_x57nc")
 region = Rect2(48, 96, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5l45c"]
+atlas = ExtResource("1_x57nc")
+region = Rect2(0, 0, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yuwtr"]
+atlas = ExtResource("1_x57nc")
+region = Rect2(0, 192, 48, 48)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p4wjx"]
 atlas = ExtResource("1_x57nc")
@@ -156,6 +165,17 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
+"texture": SubResource("AtlasTexture_5l45c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yuwtr")
+}],
+"loop": false,
+"name": &"open_door",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
 "texture": SubResource("AtlasTexture_p4wjx")
 }, {
 "duration": 1.0,
@@ -222,7 +242,7 @@ health = 7
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(16, -9)
 sprite_frames = SubResource("SpriteFrames_36vtm")
-animation = &"idle"
+animation = &"open_door"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(16, -8)
@@ -286,6 +306,13 @@ move_component = NodePath("../../MoveComponent/ClimbComponent")
 [node name="KnockedBack" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animated_sprite", "move_component")]
 script = ExtResource("9_hus0r")
 state = 5
+character = NodePath("../..")
+animated_sprite = NodePath("../../AnimatedSprite2D")
+move_component = NodePath("../../MoveComponent/WalkComponent")
+
+[node name="CompleteLevel" type="Node" parent="StateMachine" node_paths=PackedStringArray("character", "animated_sprite", "move_component")]
+script = ExtResource("10_4ysma")
+state = 6
 character = NodePath("../..")
 animated_sprite = NodePath("../../AnimatedSprite2D")
 move_component = NodePath("../../MoveComponent/WalkComponent")

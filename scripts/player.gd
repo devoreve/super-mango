@@ -4,6 +4,9 @@ extends CharacterBody2D
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+# Opening door mechanic
+var can_open_door: bool = false
+
 # Damaging mechanic
 var is_invincible: bool = false
 var is_knocked_back: bool = false
@@ -29,6 +32,7 @@ var top_ladder: PhysicsBody2D
 
 signal health_changed(current_health)
 signal coins_received(total_coins)
+signal level_completed()
 
 @onready var ray_cast_left: RayCast2D = $RayCastLeft
 @onready var ray_cast_right: RayCast2D = $RayCastRight

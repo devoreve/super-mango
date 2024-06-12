@@ -46,9 +46,12 @@ func _process(_delta):
 	
 	if ray_cast_down.is_colliding():
 		var collider = ray_cast_down.get_collider()
+		#print(collider, collider.is_in_group("triggering_platform"))
 		if collider.is_in_group("top_ladder"):
 			top_ladder = collider
 			return
+		elif collider.is_in_group("triggering_platform"):
+			collider.get_parent().get_node("PathFollow2D").is_triggered = true
 
 func _physics_process(delta):
 	# Add the gravity.

@@ -10,6 +10,7 @@ func _on_body_entered(body):
 func _on_body_exited(body):
 	if body is Character:
 		body.can_open_door = false
+		body.level_completed.disconnect(_on_level_completed)
 
 func _on_level_completed() -> void:
 	animated_sprite.play("open")

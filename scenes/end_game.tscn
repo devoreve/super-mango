@@ -1,0 +1,40 @@
+[gd_scene load_steps=4 format=3 uid="uid://dpjpo2p3numbg"]
+
+[ext_resource type="Theme" uid="uid://blixntn0u0851" path="res://themes/main_menu.tres" id="1_1by5k"]
+[ext_resource type="Texture2D" uid="uid://ybtipwdp6g2v" path="res://assets/sprites/Forest_Background_0.png" id="3_dubfw"]
+[ext_resource type="FontFile" uid="uid://cunpqy4p4g0vy" path="res://assets/fonts/PixelOperator8-Bold.ttf" id="4_wcp3o"]
+
+[node name="EndGame" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_1by5k")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 1280.0
+offset_bottom = 649.0
+texture = ExtResource("3_dubfw")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+offset_left = 227.0
+offset_top = 50.0
+offset_right = 1024.0
+offset_bottom = 126.0
+theme_override_colors/font_color = Color(0.917647, 0.196078, 0.235294, 1)
+theme_override_fonts/font = ExtResource("4_wcp3o")
+theme_override_font_sizes/font_size = 75
+text = "Super mango"
+
+[node name="SubTitle" type="Label" parent="."]
+layout_mode = 0
+offset_left = 402.0
+offset_top = 170.0
+offset_right = 873.0
+offset_bottom = 194.0
+theme_override_font_sizes/font_size = 24
+text = "A (very) short adventure"

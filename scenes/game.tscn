@@ -1969,7 +1969,6 @@ remote_path = NodePath("../../Platform5")
 [node name="Platform5" type="AnimatableBody2D" parent="Platforms/Path2D" groups=["triggering_platform"]]
 position = Vector2(11, -71)
 rotation = -0.0126599
-scale = Vector2(1, 1)
 
 [node name="Sprite2D" type="Sprite2D" parent="Platforms/Path2D/Platform5"]
 texture = ExtResource("13_h5avh")
